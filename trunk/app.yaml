@@ -1,0 +1,19 @@
+application: build-status
+version: 4
+runtime: python
+api_version: 1
+
+handlers:
+- url: /imgs
+  static_dir: imgs
+
+- url: /favicon.ico
+  static_files: imgs/favicon.ico
+  upload: imgs/favicon.ico
+
+- url: /css
+  static_dir: css
+
+- url: /.*
+  script: build-status.py
+

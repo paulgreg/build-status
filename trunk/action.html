@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<noscript>
+		<meta http-equiv="Refresh" content="60"/>
+	</noscript>
+	<meta name="robots" content="noindex, nofollow"/>
+	<title>{{ build.app_name }}:{{ build.status }}</title>
+	<link rel="stylesheet" type="text/css" href="css/action.css" media="all"/>
+	<link id="favicon" rel="icon" type="image/png" href="/imgs/favicon-{{ build.status }}.png" />
+	<script src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+	google.load("prototype", "1.6");
+	google.setOnLoadCallback(function() {
+
+		/* Use Ajax if JavaScript is supported ! */
+		new PeriodicalExecuter(function() { 
+			new Ajax.Request('/state?app_name={{ build.app_name }}', { 
+				method: 'get', 
+				onSuccess: function(xhr) {
+					var valueObject = xhr.responseJSON;
+
+					$('updateDate').update(valueObject.currentTime);
+
+					if (valueObject.passed != {{ build.passed }})
+						document.location.href = '/?app_name={{ build.app_name }}'; // If changed, reload page
+				}
+			})
+		}, 15);
+
+	});
+	</script>
+</head>
+<body class="{{ build.status }}">
+<p id="lastRefresh">
+	Last build change: {{ build.last_update}}<br/>
+	Last page update: <span id="updateDate">{{ build.current_time}}</span><br/>
+</p>
+<h1>Last {{ build.app_name }} build status:</h1>
+<h2>{{ build.status }}ed</h2>
+<p id="actions">
+	<a href="/">See instructions</a>&nbsp;-&nbsp;
+	<a href="pass?app_name={{ build.app_name }}">passed ?</a>&nbsp;-&nbsp;
+	<a href="fail?app_name={{ build.app_name }}">failed ?</a>
+</p>
+</body>
+</html>
+
