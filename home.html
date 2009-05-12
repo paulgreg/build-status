@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>build-status : show your last build status</title>
+	<meta name="robots" content="index, nofollow"/>
+	<meta name="keywords" content="build,build status,continuous integration,maven,maven2,mvn,java,fail,pass,green,red"/>
+	<meta name="author" content="Gr&eacute;gory Paul"/>
+	<meta name="description" content="build-status is a web application which shows your last build status"/>
+	<style type="text/css">
+		body { background-color: green; margin: 0 5%; }
+		#content { background-color: white; padding: 2%; border-right: 2px solid black; border-left: 2px solid black; }
+		.pass { background-color: green; color: white; }
+		.fail { background-color: red; color: white; }
+		.strong { text-align: center; font-size: x-large; }
+		.right { float: right; margin: 0 1%; }
+		.left { float: left; margin: 0 1%; }
+		a img { border: none; }
+	</style>
+	<link rel="icon" type="image/png" href="/imgs/favicon-fail.png" />
+</head>
+<body>
+	<div id="content">
+		<h1>Welcome at build-status homepage !</h1>
+		<h2>What is build-status ?</h2>
+		<p>build-status is a notification tool that you may used in addition of 
+		<a href="http://en.wikipedia.org/wiki/Continuous_Integration">continuous integration</a> practices.<br/>
+		build-status is very simple : it shows an entire red or green screen, according last action done.<br/>
+		By action, I mean an URL call : /pass or /fail.<br/>
+		So, the idea is to set up that application full page on a dedicated spare screen in you &quot;war room&quot;, 
+		so all or your fellow coders might see it.</p>
+
+		<h2>Why should I use build-status ?</h2>
+		<p>Because you wan't that anybody in your team see that the build just broke, to fix it 
+		the soon as possible !</p>
+
+		<p class="strong"><a href="?app_name=sample_project_name">See it here in action</a></p>
+		<p>You may see two links on that previous page, <a class="pass" href="/pass?app_name=sample_project_name">/pass</a> 
+		and <a class="fail" href="/fail?app_name=sample_project_name">/fail</a>, 
+		which allows you to change the build status for that project and so, the screen color.</p>
+
+		<p>To use that application on your project, simply add the parameter 'app_name' to <a href="/">base URL</a>, 
+		like that for instance : <a href="?app_name=yourprojectnamehere">http://build-status.appspot.com/?app_name=yourprojectnamehere</a></p>
+
+		<h3>Automatisation</h3>
+		<p>Of course, you won't click manually on <a class="pass" href="/pass?app_name=sample_project_name">/pass</a> and 
+		<a class="fail" href="/fail?app_name=sample_project_name">/fail</a> each time your build has passed or crashed !<br/>
+		You will usually add a plugin to your continuous integration system, to call theses actions at the end of each build.</p>
+
+		<p><a href="http://code.google.com/p/buildstatusnotifier/"><img class="right" src="imgs/buildstatusnotifier-logo.png" alt="TeamCity custom notifier logo"/></a>
+		If you're using <a href="http://www.jetbrains.com/teamcity/">TeamCity</a>, 
+		here's a <a href="http://code.google.com/p/buildstatusnotifier/">custom notifier which will do that for you</a>.<br/>
+		If you've built a plugin for <a href="https://hudson.dev.java.net/">Hudson</a>, <a href="http://continuum.apache.org/">Continuum</a>,
+	  <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> or another <acronym title="continuous integration">CI</acronym> 
+		system, contact me so I may refer to your plugin on this page !</p>
+
+		<h2>Feedback</h2>
+		<p>Contact me, Gr&eacute;gory PAUL, for any remark, bug or question.<br/>
+		My username is <strong>paulgreg</strong>, both on gmail and on <a href="http://twitter.com/paulgreg">twitter</a>.</p>
+
+		<h2>Technical stuff</h2>
+		<p><a href="http://code.google.com/appengine"><img class="left" src="http://code.google.com/appengine/images/appengine_lowres.gif" alt="Google AppEngine logo" /></a>
+    <a class="right" href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml11-blue" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+		This application is built using <a href="http://code.google.com/appengine">AppEngine</a> with <a href="http://www.python.org/">Python</a>,
+		the cloud computing solution from <a href="http://www.google.com">Google</a>. I also love respecting <a href="http://validator.w3.org/check?uri=referer">Web Standard</a>.
+  
+		<br/><br/><br/><br/></p>
+	</div>
+</body>
+</html>
