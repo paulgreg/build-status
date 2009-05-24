@@ -13,15 +13,20 @@
 	<script type="text/javascript">
 	google.load("prototype", "1.6");
 	google.setOnLoadCallback(function() {
+		// If JavaScript's supported :
+		// First, fix time according current browser time zone
+		var tzOffset = (new Date()).getTimezoneOffset() * 60000;
+		$('changeDate').update(computeLocalTime('{{ build.last_update.ctime }}'));
+		$('updateDate').update(computeLocalTime('{{ build.current_time.ctime }}'));
 
-		/* Use Ajax if JavaScript is supported ! */
+		// Then, use Ajax instead of HTTP refresh
 		new PeriodicalExecuter(function() { 
 			new Ajax.Request('/state?app_name={{ build.app_name }}', { 
 				method: 'get', 
 				onSuccess: function(xhr) {
 					var valueObject = xhr.responseJSON;
 
-					$('updateDate').update(valueObject.currentTime);
+					$('updateDate').update(computeLocalTime(valueObject.currentTime));
 
 					if (valueObject.passed != {{ build.passed }})
 						document.location.href = '/?app_name={{ build.app_name }}'; // If changed, reload page
@@ -29,13 +34,17 @@
 			})
 		}, 15);
 
+		function computeLocalTime(time) {
+			var localDate = new Date(time).getTime() - tzOffset;
+			return new Date(localDate);
+		}
 	});
 	</script>
 </head>
 <body class="{{ build.status }}">
 <p id="lastRefresh">
-	Last build change: {{ build.last_update}}<br/>
-	Last page update: <span id="updateDate">{{ build.current_time}}</span><br/>
+	Last build change: <span id="changeDate">{{ build.last_update.ctime }}</span><br/>
+	Last page update: <span id="updateDate">{{ build.current_time.ctime }}</span><br/>
 </p>
 <h1>Last {{ build.app_name }} build status:</h1>
 <h2>{{ build.status }}ed</h2>
