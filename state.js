@@ -1,4 +1,4 @@
 {   
 	passed: {{ build.passed }},
-	currentTime : '{{ build.current_time }}'
+	currentTime : '{{ build.current_time.ctime }}'
 }
