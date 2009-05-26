@@ -1,0 +1,17 @@
+ Version 6
+Put JavaScript into files, add Google Analytics scripts on action page
+
+ Version 5
+Format date (in JavaScript) to local browser time zone, add Google Analytics scripts on home page
+
+ Version 4
+Use Ajax instead of HTTP refresh if JavaScript's supported
+
+ Version 3
+Add a decent home page
+
+ Version 2
+Add favicons
+
+ Version 1
+Initial release
