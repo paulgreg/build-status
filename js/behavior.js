@@ -2,11 +2,26 @@
 
 var Build = {}; // Create a container
 
+Build.secondCounter = 0; // Init counter
 Build.tzOffset = (new Date()).getTimezoneOffset() * 60000; // Set a timezone offset
 
 Build.computeLocalTime = function(time) {
-	var localDate = new Date(time).getTime() - Build.tzOffset;
-	return new Date(localDate);
+	var localTime = new Date(time).getTime() - Build.tzOffset;
+	return new Date(localTime);
+}
+
+Build.getDeltaFromToday = function(date) {
+	var now = (new Date()).getTime(); // Local time
+	var buildChange = new Date(date).getTime() - Build.tzOffset; // Server time to adapt to local timezone
+	return parseInt( (now - buildChange) / 1000 ); // Convert milliseconds to seconds
+}
+
+Build.convertSecondsToHHMMSS = function(seconds) {
+	var hours = Math.floor(seconds / (60 * 60));
+	var minutes = Math.floor(seconds % (60 * 60) / 60);
+	var secounds = seconds % 60;
+
+	return hours.toPaddedString(2) + ':' + minutes.toPaddedString(2) + ':' + secounds.toPaddedString(2);
 }
 
 google.load("prototype", "1.6");
@@ -35,4 +50,13 @@ google.setOnLoadCallback(function() {
 			}
 		})
 	}, 15);
+
+	// Set number of secound since last build change
+	Build.secondCounter = Build.getDeltaFromToday(Build.changeDate);
+
+	// At least, set a second counter since last build change
+	new PeriodicalExecuter(function() {
+		Build.secondCounter++;
+		$('counter').update( "for " + Build.convertSecondsToHHMMSS(Build.secondCounter) );
+	}, 1);
 });
