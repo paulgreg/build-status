@@ -32,11 +32,11 @@ google.setOnLoadCallback(function() {
 	Build.updateDate = $('updateDate').innerHTML;
 	Build.appName    = $('appName').innerHTML;
 
-	// First, fix time according current browser time zone
+	// 1. Fix time according current browser time zone
 	$('changeDate').update(Build.computeLocalTime( Build.changeDate ));
 	$('updateDate').update(Build.computeLocalTime( Build.updateDate ));
 
-	// Then, use more often Ajax refresh instead of HTTP ones
+	// 2. Use more often Ajax refresh instead of HTTP ones
 	new PeriodicalExecuter(function() {
 		new Ajax.Request('/state?app_name=' + Build.appName, { 
 			method: 'get', 
@@ -54,9 +54,16 @@ google.setOnLoadCallback(function() {
 	// Set number of secound since last build change
 	Build.secondCounter = Build.getDeltaFromToday(Build.changeDate);
 
-	// At least, set a second counter since last build change
+	// 3. Set a second counter since last build change
 	new PeriodicalExecuter(function() {
 		Build.secondCounter++;
 		$('counter').update( "for " + Build.convertSecondsToHHMMSS(Build.secondCounter) );
 	}, 1);
+
+	// 4. Load Google Analytics
+	try {
+		var pageTracker = _gat._getTracker("UA-8913337-1");
+		pageTracker._trackPageview();
+	} catch(err) {}
+
 });
