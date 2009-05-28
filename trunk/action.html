@@ -9,9 +9,9 @@
 	<title>{{ build.app_name }}:{{ build.status }}</title>
 	<link rel="stylesheet" type="text/css" href="css/action.css" media="all"/>
 	<link id="favicon" rel="icon" type="image/png" href="/imgs/favicon-{{ build.status }}.png" />
-	<script type="text/javascript" src="js/google-analytics.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="js/behavior.js"></script>
+	<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+	<script type="text/javascript" src="js/action-behavior.js"></script>
 	<script type="text/javascript">Build.passed={{ build.passed }};</script>
 </head>
 <body class="{{ build.status }}">
