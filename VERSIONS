@@ -1,3 +1,6 @@
+ Version 8
+Make time since last build change more human readable, like this : "for 1 day, 3 hours, 23 minutes, 2 seconds"
+
  Version 7
 Add a counter since last build change, enhance actions positions (CSS)
  

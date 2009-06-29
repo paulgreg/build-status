@@ -4,6 +4,7 @@ var Build = {}; // Create a container
 
 Build.secondCounter = 0; // Init counter
 Build.tzOffset = (new Date()).getTimezoneOffset() * 60000; // Set a timezone offset
+Build.value = "";
 
 Build.computeLocalTime = function(time) {
 	var localTime = new Date(time).getTime() - Build.tzOffset;
@@ -16,12 +17,29 @@ Build.getDeltaFromToday = function(date) {
 	return parseInt( (now - buildChange) / 1000 ); // Convert milliseconds to seconds
 }
 
-Build.convertSecondsToHHMMSS = function(seconds) {
-	var hours = Math.floor(seconds / (60 * 60));
-	var minutes = Math.floor(seconds % (60 * 60) / 60);
-	var secounds = seconds % 60;
+Build.convertSecondsToDayHHMMSS = function(seconds) {
 
-	return hours.toPaddedString(2) + ':' + minutes.toPaddedString(2) + ':' + secounds.toPaddedString(2);
+	var days = Math.floor(seconds / 86400); // 1 day = 60 * 60 * 24 seconds
+	var hours = Math.floor(seconds %  86400 / 3600);
+	var minutes = Math.floor(seconds % 3600 / 60); // 1 hour = 3600 seconds
+	var seconds = seconds % 60;
+
+	Build.value = "";
+	Build.format(days, "day");
+	Build.format(hours, "hour");
+	Build.format(minutes, "minute");
+	Build.format(seconds, "second");
+	return Build.value;
+}
+
+Build.format = function(value, word) {
+	if (value > 0) {
+		if (Build.value.length > 0)
+			Build.value += ", ";
+		Build.value += value + " " + word;
+		if (value > 1)
+			Build.value += "s";
+	}
 }
 
 google.load("prototype", "1.6");
@@ -57,7 +75,7 @@ google.setOnLoadCallback(function() {
 	// 3. Set a second counter since last build change
 	new PeriodicalExecuter(function() {
 		Build.secondCounter++;
-		$('counter').update( "for " + Build.convertSecondsToHHMMSS(Build.secondCounter) );
+		$('counter').update( "for " + Build.convertSecondsToDayHHMMSS(Build.secondCounter) );
 	}, 1);
 
 	// 4. Load Google Analytics
