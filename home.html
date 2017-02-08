@@ -26,34 +26,34 @@
 	<div id="content">
 		<h1>Welcome to build-status homepage !</h1>
 		<h2>What is build-status ?</h2>
-		<p>build-status is a notification tool that you may use in addition of 
+		<p>build-status is a notification tool that you may use in addition of
 		<a href="http://en.wikipedia.org/wiki/Continuous_Integration">continuous integration</a> practices.<br/>
 		build-status is very simple : it shows an entire red or green screen, according to the last action done.<br/>
 		By action, I mean an URL call : /pass or /fail.<br/>
-		So, the idea is to set up that application full page on a dedicated spare screen in your &quot;war room&quot;, 
+		So, the idea is to set up that application full page on a dedicated spare screen in your &quot;war room&quot;,
 		so all of your fellow coders can see it.</p>
 
 		<h2>Why should I use build-status ?</h2>
 		<p>Because you want anybody in your team to be aware that the build just broke, so one can fix it as soon as possible !</p>
 
 		<p class="strong"><a href="?app_name=sample_project_name">See it here in action</a></p>
-		<p>You may see two links on that previous page, <a class="pass" href="/pass?app_name=sample_project_name">/pass</a> 
-		and <a class="fail" href="/fail?app_name=sample_project_name">/fail</a>, 
+		<p>You may see two links on that previous page, <a class="pass" href="/pass?app_name=sample_project_name">/pass</a>
+		and <a class="fail" href="/fail?app_name=sample_project_name">/fail</a>,
 		that allow you to change the build status for that project and so, the screen color.</p>
 
-		<p>To use that application on your project, simply add the parameter 'app_name' to the <a href="/">base URL</a>, 
+		<p>To use that application on your project, simply add the parameter 'app_name' to the <a href="/">base URL</a>,
 		as follows : <a href="?app_name=yourprojectnamehere">http://build-status.appspot.com/?app_name=yourprojectnamehere</a></p>
 
 		<h3>Automatisation</h3>
-		<p>Of course, you won't click manually on <a class="pass" href="/pass?app_name=sample_project_name">/pass</a> and 
+		<p>Of course, you won't click manually on <a class="pass" href="/pass?app_name=sample_project_name">/pass</a> and
 		<a class="fail" href="/fail?app_name=sample_project_name">/fail</a> each time your build has passed or crashed !<br/>
 		You will usually add a plugin to your continuous integration system, to call these actions at the end of each build.</p>
 
-		<p><a href="http://code.google.com/p/buildstatusnotifier/"><img class="right" src="imgs/buildstatusnotifier-logo.png" alt="TeamCity custom notifier logo"/></a>
-		If you're using <a href="http://www.jetbrains.com/teamcity/">TeamCity</a>, 
-		here's a <a href="http://code.google.com/p/buildstatusnotifier/">custom notifier which will do that for you</a>.<br/>
+		<p><a href="https://github.com/paulgreg/buildstatusnotifier"><img class="right" src="imgs/buildstatusnotifier-logo.png" alt="TeamCity custom notifier logo"/></a>
+		If you're using <a href="http://www.jetbrains.com/teamcity/">TeamCity</a>,
+		here's a <a href="https://github.com/paulgreg/buildstatusnotifier">custom notifier which will do that for you</a>.<br/>
 		If you've built a plugin for <a href="https://hudson.dev.java.net/">Hudson</a>, <a href="http://continuum.apache.org/">Continuum</a>,
-	  <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> or another <acronym title="continuous integration">CI</acronym> 
+	  <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> or another <acronym title="continuous integration">CI</acronym>
 		system, contact me so I may refer to your plugin on this page !</p>
 
 		<h2>Feedback</h2>
@@ -61,13 +61,12 @@
 		My username is <strong>paulgreg</strong>, both on gmail and on <a href="http://twitter.com/paulgreg">twitter</a>.</p>
 
 		<h2>Technical stuff</h2>
-		<p><a href="http://code.google.com/appengine"><img class="left" src="http://code.google.com/appengine/images/appengine_lowres.gif" alt="Google AppEngine logo" /></a>
-    <a class="right" href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml11-blue" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+		<p><a class="right" href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml11-blue" alt="Valid XHTML 1.1" height="31" width="88" /></a>
 		This application is built using <a href="http://code.google.com/appengine">AppEngine</a> with <a href="http://www.python.org/">Python</a>,
 		the cloud computing solution from <a href="http://www.google.com">Google</a>. I also take care respecting <a href="http://validator.w3.org/check?uri=referer">Web Standard</a>.
 		</p>
 		<p>
-		You will find that application's source code on the <a href="http://code.google.com/p/build-status/">dedicated google code project page</a>.
+        You will find that application's <a href="https://github.com/paulgreg/build-status">source code on github</a>.
 		</p>
 	</div>
 </body>
