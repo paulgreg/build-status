@@ -2,8 +2,7 @@ import cgi
 import datetime
 import os
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+import webapp2
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
@@ -11,7 +10,7 @@ from google.appengine.ext.webapp import template
 class Build(db.Model):
   app_name = db.StringProperty(multiline=False)
   has_passed = db.BooleanProperty()
-  last_update = db.DateTimeProperty(auto_now_add=True)  
+  last_update = db.DateTimeProperty(auto_now_add=True)
 
 
 def getBuild(app_name):
@@ -45,7 +44,7 @@ def render(self, app_name, page):
   self.response.out.write(template.render(path,	{ 'build': build } ))
 
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
   def get(self):
     app_name = self.request.get('app_name')
 
@@ -68,17 +67,17 @@ def updatePage(self, status):
     self.redirect('/?app_name=' + app_name)
 
 
-class UpdateToPassedPage(webapp.RequestHandler):
+class UpdateToPassedPage(webapp2.RequestHandler):
   def get(self):
     updatePage(self, True)
 
 
-class UpdateToFailedPage(webapp.RequestHandler):
+class UpdateToFailedPage(webapp2.RequestHandler):
   def get(self):
     updatePage(self, False)
 
 
-class GetJsonState(webapp.RequestHandler):
+class GetJsonState(webapp2.RequestHandler):
   def get(self):
     app_name = self.request.get('app_name')
 
@@ -89,14 +88,9 @@ class GetJsonState(webapp.RequestHandler):
       render(self, app_name, 'state.js')
 
 
-application = webapp.WSGIApplication(
-                                     [('/', MainPage),
-                                     ('/pass', UpdateToPassedPage),
-                                     ('/fail', UpdateToFailedPage),
-                                     ('/state', GetJsonState)])
+app = webapp2.WSGIApplication(
+    [('/', MainPage),
+     ('/pass', UpdateToPassedPage),
+     ('/fail', UpdateToFailedPage),
+     ('/state', GetJsonState)])
 
-def main():
-  run_wsgi_app(application)
-
-if __name__ == "__main__":
-  main()

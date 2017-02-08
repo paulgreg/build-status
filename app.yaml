@@ -1,7 +1,8 @@
-application: build-status
-version: 8
-runtime: python
+application: build-status-hrd
+version: 9
+runtime: python27
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /imgs
@@ -18,5 +19,5 @@ handlers:
   static_dir: js
 
 - url: /.*
-  script: build-status.py
+  script: build-status.app
 
